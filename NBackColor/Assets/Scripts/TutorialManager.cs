@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* 튜토리얼 매니저 스크립트
+*/
+
 public class TutorialManager : MonoBehaviour
 {
+    #region 변수
     public GameObject[] Light = new GameObject[9];
     public GameObject[] Tuto = new GameObject[6];
 
@@ -21,6 +26,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject TouchOff;
 
     public int correct;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +79,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    IEnumerator InitLight()
+    IEnumerator InitLight() //불빛 초기화
     {
         for (int firstChange = 0; firstChange < 3; firstChange++)
         {
@@ -107,7 +113,7 @@ public class TutorialManager : MonoBehaviour
         Tuto[3].SetActive(true);
     }
 
-    public void ClickRight()
+    public void ClickRight() //O를 클릭했을 경우
     {
         if (order[ChangeNum - 1] == order[ChangeNum - 2]) //맞음
         {
@@ -137,9 +143,9 @@ public class TutorialManager : MonoBehaviour
         TouchOff.SetActive(true);
         //패널 올리기
         GameObject.Find("Canvas").transform.Find("TutorialPanel").gameObject.SetActive(true);
-    }
+    } 
 
-    public void ClickWrong()
+    public void ClickWrong() //X를 클릭했을 경우
     {
         if (order[ChangeNum - 1] != order[ChangeNum - 2]) //틀림
         {
@@ -166,7 +172,7 @@ public class TutorialManager : MonoBehaviour
         }
         TouchOff.SetActive(true);
         GameObject.Find("Canvas").transform.Find("TutorialPanel").gameObject.SetActive(true);
-    }
+    } 
 
     public void ShowResult()
     {
@@ -174,25 +180,25 @@ public class TutorialManager : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("ResultPanel").gameObject.SetActive(true);
     }
 
-    public void PauseButton()
+    public void PauseButton() //일시정지
     {
         SoundManager.instance.Btn_Click();
         Time.timeScale = 0f;
     }
 
-    public void KeepGoing()
+    public void KeepGoing() //계속하기
     {
         SoundManager.instance.Btn_Click();
         Time.timeScale = 1f;
     }
 
-    public void HomeButton()
+    public void HomeButton() //홈으로
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.MainMenu();
     }
 
-    public void Restart()
+    public void Restart() //다시하기
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.Tutorial();

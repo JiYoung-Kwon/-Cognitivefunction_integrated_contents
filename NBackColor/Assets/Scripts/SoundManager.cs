@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* 사운드 매니저 스크립트
+*/
+
 public class SoundManager : MonoBehaviour
 {
+    #region 변수
     public AudioClip btn_sound;
     public AudioClip success_sound;
     public AudioClip failure_sound;
-    public AudioClip dog_sound;
-    public AudioClip[] bell;
     AudioSource myAudio;
+    #endregion
+
+    #region Singleton
     public static SoundManager instance;
 
     void Awake()
@@ -19,52 +25,24 @@ public class SoundManager : MonoBehaviour
             SoundManager.instance = this;
         }
     }
+    #endregion
+
     // Use this for initialization
     void Start()
     {
         myAudio = GetComponent<AudioSource>();
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); //씬 넘어가도 SoundManager 오브젝트 살리기
     }
-    public void Btn_Click()
+    public void Btn_Click() //클릭 버튼음
     {
         myAudio.PlayOneShot(btn_sound);
     }
-    public void Success()
+    public void Success() //성공 효과음
     {
         myAudio.PlayOneShot(success_sound);
-
     }
-    public void Failure()
+    public void Failure() //실패 효과음
     {
         myAudio.PlayOneShot(failure_sound);
-    }
-    public void Dog()
-    {
-        myAudio.PlayOneShot(dog_sound);
-    }
-    public void Bell(int i)
-    {
-        switch (i)
-        {
-            case 0:
-                myAudio.PlayOneShot(bell[0]);
-                break;
-            case 1:
-                myAudio.PlayOneShot(bell[1]);
-                break;
-            case 2:
-                myAudio.PlayOneShot(bell[2]);
-                break;
-            case 3:
-                myAudio.PlayOneShot(bell[3]);
-                break;
-            default:
-                break;
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
