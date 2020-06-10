@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
  
     public void ClickWrong() //X를 클릭했을 경우
     {
-        if (order[ChangeNum - 1] != order[ChangeNum - 1 - SceneChangeManager.SCENE.Level]) //틀림
+        if (order[ChangeNum - 1] != order[ChangeNum - 1 - SceneChangeManager.SCENE.Level]) //맞음
         {
             Debug.Log("맞음");
             SoundManager.instance.Success();

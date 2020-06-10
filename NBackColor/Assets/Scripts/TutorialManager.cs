@@ -34,12 +34,6 @@ public class TutorialManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OkayButton()
     {
         SoundManager.instance.Btn_Click();
