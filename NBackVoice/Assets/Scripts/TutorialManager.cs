@@ -76,7 +76,7 @@ public class TutorialManager : MonoBehaviour
     {
         for (int firstChange = 0; firstChange < 3; firstChange++)
         {
-            int a = Random.Range(0, 2);
+            int a = Random.Range(0, 2); //튜토리얼은 a,b 음성 두 개로 진행
             order.Add(a);
             ChangeNum++;
 
