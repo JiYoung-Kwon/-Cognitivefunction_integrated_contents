@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    #region 변수
     public GameObject[] Button = new GameObject[4];
     public GameObject[] Life = new GameObject[3];
     public GameObject Circle;
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
     public int life;
     public int randomNum;
     public Text CircleText;
+    #endregion
 
+    #region Singleton
     private static GameManager _gameManager;
     public static GameManager Game
     {
@@ -28,6 +31,8 @@ public class GameManager : MonoBehaviour
     {
         _gameManager = GetComponent<GameManager>();
     }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,12 +40,6 @@ public class GameManager : MonoBehaviour
         stage = 2;       
         Init();
         StartCoroutine("Display");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Init() //초기화함수

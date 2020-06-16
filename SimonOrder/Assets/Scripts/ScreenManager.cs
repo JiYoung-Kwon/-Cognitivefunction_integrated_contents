@@ -7,6 +7,8 @@ public class ScreenManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Screen.SetResolution(Screen.width, Screen.width * 1080 / 1920, true);
+
+        #region 주석
         /*Screen.sleepTimeout = SleepTimeout.NeverSleep;
         float targetWidthAspect = 16f;
         float targetHeightAspect = 9f;
@@ -29,10 +31,6 @@ public class ScreenManager : MonoBehaviour {
             mainCamera.rect.y + Math.Abs(heightadd),
             mainCamera.rect.width + (widthadd * 2),
             mainCamera.rect.height + (heightadd * 2));*/
+        #endregion
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
