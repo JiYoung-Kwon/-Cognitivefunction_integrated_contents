@@ -30,12 +30,6 @@ public class SceneChangeManager : MonoBehaviour
         Level = 1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void MainMenu() //메인씬 로드 + 버튼음
     {
         SoundManager.instance.Btn_Click();

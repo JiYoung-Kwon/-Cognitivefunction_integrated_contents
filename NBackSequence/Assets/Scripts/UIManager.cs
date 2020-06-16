@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* UI 매니저 스크립트
+*/
+
 public class UIManager : MonoBehaviour
 {
+    #region Singleton
     private static UIManager _uiManager;
     public static UIManager UI
     {
@@ -14,9 +19,10 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         _uiManager = GetComponent<UIManager>();
-
     }
+    #endregion
 
+    #region 변수
     public double _time = 0;
     public Text _timerText;
     public Text Stage;
@@ -25,6 +31,7 @@ public class UIManager : MonoBehaviour
     public Text ResultTime;
     public Text ResultStage;
     public Text ResultScore;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +42,16 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Game.stage - 1 < 10)
+        //단계 UI
+        if (GameManager.Game.stage - 1 < 10)
             Stage.text = "0" + (GameManager.Game.stage);
         else
             Stage.text = "" + (GameManager.Game.stage);
 
+        //점수 UI
         Score.text = "" + (GameManager.Game.stage - 1) * 10;
 
+        //시간 UI
         _time += Time.deltaTime;
         int minute = (int)_time / 60;
         int second = (int)_time - (minute * 60);
@@ -58,31 +68,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void GameStart()
+    public void GameStart() //게임시작
     {
         SoundManager.instance.Btn_Click();       
         Time.timeScale = 1f;
     }
 
-    public void GameQuit()
+    public void GameQuit() //게임종료
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.MainMenu();
     }
 
-    public void GamePause()
+    public void GamePause() //일시정지
     {
         SoundManager.instance.Btn_Click();
         Time.timeScale = 0f;
     }
 
-    public void Restart()
+    public void Restart() //다시하기
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.GameStart();
     }
 
-    public void ShowResult()
+    public void ShowResult() //결과UI
     {
         ResultStage.text = Stage.text + " 단계 성공!!";
         ResultTime.text = "시간 - " + _timerText.text;
