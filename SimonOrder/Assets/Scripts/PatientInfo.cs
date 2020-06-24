@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 환자 정보 스크립트
+ */
+
 public class PatientInfo
 {
     public int UserID { get; set; }

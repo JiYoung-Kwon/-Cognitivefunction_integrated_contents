@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * 튜토리얼 매니저 스크립트
+ */
+
 public class TutorialManager : MonoBehaviour
 {
+    #region 변수
     public GameObject[] Button = new GameObject[4];
     public GameObject[] Tuto = new GameObject[5];
     public int tutoNum;
@@ -17,15 +22,18 @@ public class TutorialManager : MonoBehaviour
     public int randomNum;
     public int correct;
     public bool IsCorrect = true;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1f;
     }
 
-    public void OkayButton()
+    public void OkayButton() //확인 버튼 클릭
     {
-        SoundManager.instance.Btn_Click();
+        SoundManager.instance.Btn_Click(); //버튼음
+
         //1->2->3->게임진행->4
         //맞춤-> 6 -> 게임진행 -> 4 -> 맞추면 끝. 틀리면 다시
         //틀림-> 5 -> 게임진행 -> 4 -> 무한반복
@@ -93,7 +101,7 @@ public class TutorialManager : MonoBehaviour
         order.Clear();
     }
 
-    IEnumerator Display()
+    IEnumerator Display() //랜덤 패널 점등 함수
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -101,10 +109,10 @@ public class TutorialManager : MonoBehaviour
         {
             order.Add(Random.Range(0, 4)); //0~3까지
             yield return new WaitForSeconds(1f);
-            Button[order[i]].GetComponent<Image>().color = HighColor;
-            SoundManager.instance.Bell(order[i]);
+            Button[order[i]].GetComponent<Image>().color = HighColor; //점등
+            SoundManager.instance.Bell(order[i]); //점등 사운드
             yield return new WaitForSeconds(1f);
-            Button[order[i]].GetComponent<Image>().color = OriginColor;
+            Button[order[i]].GetComponent<Image>().color = OriginColor; //불꺼짐
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -113,19 +121,20 @@ public class TutorialManager : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("TutorialPanel").gameObject.SetActive(true); //4 올려져있는 상태
     }
 
-    public void ButtonClick(int n)
+    public void ButtonClick(int n) //버튼 클릭 함수
     {
-        Button[n].GetComponent<Image>().color = HighColor;
+        Button[n].GetComponent<Image>().color = HighColor; //불 켜짐
         //값 비교
         if (n == order[randomNum]) //맞추면
         {
-            SoundManager.instance.Success();
+            SoundManager.instance.Success(); //성공 효과음
             IsCorrect = true;
             correct++;
 
-            if (correct == 2)
+            if (correct == 2) //2번 맞출 경우
             {
-                ShowResult();
+
+                ShowResult(); //결과 화면
             }
             else
             {
@@ -145,30 +154,30 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void PauseButton()
+    public void PauseButton() //일시정지
     {
         SoundManager.instance.Btn_Click();
         Time.timeScale = 0f;
     }
 
-    public void KeepGoing()
+    public void KeepGoing() //계속하기
     {
         SoundManager.instance.Btn_Click();
         Time.timeScale = 1f;
     }
 
-    public void HomeButton()
+    public void HomeButton() //홈으로
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.MainMenu();
     }
 
-    public void ShowResult()
+    public void ShowResult() //결과 패널 띄우기
     {
         GameObject.Find("Canvas").transform.Find("ResultPanel").gameObject.SetActive(true);
     }
 
-    public void Restart()
+    public void Restart() //다시하기
     {
         SoundManager.instance.Btn_Click();
         SceneChangeManager.SCENE.Tutorial();

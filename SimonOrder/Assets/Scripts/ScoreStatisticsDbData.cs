@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 점수 정보 스크립트
+ */
+
 public class ScoreStatisticsData
 {
     public int UserID { get; set; }

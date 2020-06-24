@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 사운드 매니저 스크립트
+ */
+
+
 public class SoundManager : MonoBehaviour {
+
+    #region 변수
     public AudioClip btn_sound;
     public AudioClip success_sound;
     public AudioClip failure_sound;
@@ -11,7 +18,9 @@ public class SoundManager : MonoBehaviour {
 
     public AudioSource BGMSource;
     public AudioClip BGMClip;
+    #endregion
 
+    #region Singleton
     public static SoundManager instance;
 
     void Awake()
@@ -21,11 +30,14 @@ public class SoundManager : MonoBehaviour {
             SoundManager.instance = this;
         }
     }
-	// Use this for initialization
-	void Start ()
+    #endregion
+
+    // Use this for initialization
+    void Start ()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main"))
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("Main")) //main씬이면
         {
+            //BGM재생
             BGMSource.clip = BGMClip;
             BGMSource.loop = true;
             BGMSource.Play();
@@ -33,20 +45,19 @@ public class SoundManager : MonoBehaviour {
         myAudio = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
 	}
-    public void Btn_Click()
+    public void Btn_Click() //버튼음
     {
         myAudio.PlayOneShot(btn_sound);
     }
-    public void Success()
+    public void Success() //성공 효과음
     {
         myAudio.PlayOneShot(success_sound);
-
     }
-    public void Failure()
+    public void Failure() //실패 효과음
     {
         myAudio.PlayOneShot(failure_sound);
     }
-	public void Bell(int i)
+	public void Bell(int i) //벨소리(패널 점등 소리)
     {
         switch(i)
         {
@@ -66,8 +77,4 @@ public class SoundManager : MonoBehaviour {
                 break;
         }
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

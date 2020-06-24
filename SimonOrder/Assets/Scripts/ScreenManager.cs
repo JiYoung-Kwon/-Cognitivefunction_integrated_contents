@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScreenManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
-        Screen.SetResolution(Screen.width, Screen.width * 1080 / 1920, true);
+        Screen.SetResolution(Screen.width, Screen.width * 1080 / 1920, true);  //유니티 해상도 설정
 
         #region 주석
         /*Screen.sleepTimeout = SleepTimeout.NeverSleep;
